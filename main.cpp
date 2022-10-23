@@ -12,22 +12,19 @@
 // }
 
 #include <iostream>
-#include <vector>
 #include <string>
+#include <vector>
 
 #include "./common/demo.hpp"
 #include "./common/fileReader.hpp"
 
 using namespace std;
-int main()
-{
-    HelloWorld("Yezhi");
-    
-    vector<string> ve = FileReader("");
-    for (size_t i = 0; i < ve.size(); i++)
-    {
-        cout << ve[i]<<endl;
+int main() {
+  HelloWorld("Yezhi");
+
+  string *file = FileReader("");
+  for (size_t i = 0; i < FILE_LINE_SIZE; i++) {
+    cout << file[i] << endl;
     }
-    
-    return 0;
+  return 0;
 }

@@ -1,15 +1,17 @@
 #include <iostream>
-#include <vector>
 #include <string>
 
 #include "fileReader.hpp"
+
 using namespace std;
-vector<string> FileReader(string path)
-{
-    vector<string> ve;
-    for (size_t i = 0; i < ROW_SIZE; i++)
-    {
-        ve.push_back(to_string(i));
-    }
-    return ve;
+
+string *FileReader(string path) {
+
+  string *fileStr = new string[FILE_LINE_SIZE];
+
+  for (size_t i = 0; i < FILE_LINE_SIZE; i++) {
+    fileStr[i] = to_string(i);
+  }
+
+  return fileStr;
 }
