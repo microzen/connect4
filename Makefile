@@ -26,4 +26,4 @@ debug-clean: $(OBJS)
 
 clean:
 	rm -f $(OBJS) $(DEPS)
-	/bin/bash ./cleanup.sh 
+#	/bin/bash ./cleanup.sh 
