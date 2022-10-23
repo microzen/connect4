@@ -30,3 +30,25 @@
 *.exe
 *.out
 *.app
+
+# Replit
+*.replit
+*.nix
+*-debug
+.ccls-cache/**
+.ccls-cache/
+*.out
+.cache/**
+.cache/
+replit.nix
+main
+
+# Mac
+.DS_Store
+
+#VSCode
+.vscode/
+.vscode/**
+
+
+*.dSYM
