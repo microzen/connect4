@@ -21,8 +21,9 @@ include $(DEPS)
 main: $(OBJS)
 	$(CXX) $(CXXFLAGS) $(OBJS) -o "$@"
 
-main-debug: $(OBJS)
+debug-clean: $(OBJS)
 	$(CXX) $(CXXFLAGS) -O0 $(OBJS) -o "$@"
 
 clean:
 	rm -f $(OBJS) $(DEPS)
+	/bin/bash ./cleanup.sh 
