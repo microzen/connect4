@@ -2,21 +2,13 @@
 // Please check the C++ Style Guide
 // https://google.github.io/styleguide/cppguide.html
 
-// #include <iostream>
-// #include "demo.h"
-
-// int main(int argc, char const *argv[])
-// {
-//     LOG;
-//     return 0;
-// }
-
+#pragma one
 #include <iostream>
 #include <string>
 #include <vector>
 
 #include "./common/demo.hpp"
-#include "./common/fileReader.hpp"
+#include "./common/file_operator.hpp"
 
 using namespace std;
 int main() {
