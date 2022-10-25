@@ -4,6 +4,12 @@
 #define C4_ROW 6
 #define C4_COLUMN 7
 
+enum PieceColor{
+    NONE = 0,
+    RED,
+    YELLOW
+};
+
 #include <iostream>
 #include <time.h>
 #include <string>
