@@ -2,6 +2,7 @@ all: main clean
 
 CXX = clang++
 override CXXFLAGS += -g -Wno-everything
+override CXXFLAGS += -std=c++17
 
 SRCS = $(shell find ./ -name '.ccls-cache' -type d -prune -o -type f -name '*.cpp' -print | sed -e 's/ /\\ /g')
 OBJS = $(SRCS:.cpp=.o)
@@ -26,4 +27,3 @@ debug-clean: $(OBJS)
 
 clean:
 	rm -f $(OBJS) $(DEPS)
-#	/bin/bash ./cleanup.sh 
