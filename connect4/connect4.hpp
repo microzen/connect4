@@ -3,6 +3,7 @@
 
 #define C4_ROW 6
 #define C4_COLUMN 7
+#define C4_MAXVALUE 42
 
 enum PieceColor{
     NONE = 0,
