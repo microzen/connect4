@@ -2,6 +2,11 @@
 #include "../connect4/connect4.hpp"
 
 using namespace std;
+class ConnectSub
+{
+public:
+    void dropPiece(int);
+};
 class User
 {
 private:
