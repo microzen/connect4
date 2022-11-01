@@ -1,4 +1,7 @@
 #include <iostream>
+#include "winning.hpp"
+#include "connect4.hpp"
+#include "../common/sort.hpp"
 
 const int _WINNING_ARRAYS[69][4] = {
     {0, 1, 2, 3},
@@ -71,6 +74,169 @@ const int _WINNING_ARRAYS[69][4] = {
     {12, 19, 26, 33},
     {13, 20, 27, 34},
 };
-bool isWin(int step, int turn, std::string **table)
+void display(int *[4], int);
+// 0   1   2   3   4   5   6
+// 7   8   9  10  11  12  13
+// 14  15  16  17  18  19  20
+// 21  22  23  24  25  26  27
+// 28  29  30  31  32  33  34
+// 35  36  37  38  39  40  41
+
+// 0               -N-
+// 1 7             -N-
+// 2 8 14          -N-
+// 3 9 15 21               -N-
+// 4 10 16 22 28           -N-
+// 5 11 17 23 29 35                -N-
+// 6 12 18 24 30 36                -M-
+// 13 19 25 31 37          -M-
+// 20 26 32 38             -M-
+// 27 33 39                -M-
+// 34 40           -M-
+// 41
+
+// 0               -N-
+// 1 2             -N-
+// 3 4 5           -N-
+// 6 7 8 9                 -N-
+// 10 11 12 13 14          -N-
+// 15 16 17 18 19 20               -N-
+// 21 22 23 24 25 26               -M-
+// 27 28 29 30 31          -M-
+// 32 33 34 35             -M-
+// 36 37 38                -M-
+// 39 40           -M-
+// 41
+
+int **currentWin(int spet)
 {
+}
+int **wayOfWins()
+{
+
+    int winTree[42];
+    int number = 0;
+    int testNumber = 22;
+    int count = 0;
+    while (testNumber >= 7 || (testNumber + 1) % 7 == 0)
+    {
+        testNumber = testNumber - 7 + 1;
+        count++;
+    }
+
+    std::cout << testNumber << " Number\n";
+    std::cout << count << " Count\n";
+    if (testNumber < 7)
+    {
+        for (size_t i = 1; i <= testNumber; i++)
+        {
+            number += i;
+        }
+    }
+    else
+    {
+        number = C4_ROW + testNumber / C4_COLUMN;
+    }
+
+    std::cout << number + count << " Index\n";
+
+    return NULL;
+    for (size_t i = 0; i < C4_COLUMN * C4_ROW; i++)
+    {
+        winTree[i] = number;
+        std::cout << i << " ";
+        if (number % C4_COLUMN == 0)
+        {
+            std::cout << "\t\t-N-\n";
+            number = number / C4_COLUMN + 1;
+        }
+        else if (number + C4_COLUMN > C4_COLUMN * C4_ROW)
+        {
+            std::cout << "\t\t-M-\n";
+            number = C4_ROW + (number % C4_COLUMN) * 7;
+        }
+        else
+        {
+            number = number + C4_COLUMN - 1;
+        }
+    }
+    return NULL;
+
+    int range = 4;
+    int rowWinSum = C4_COLUMN - 3;
+    int *rowWin[4];
+    int size = 0;
+    for (size_t cindex = 0; cindex < C4_COLUMN - range; cindex++, size++)
+    {
+        for (int irange = 0; irange < range; irange++)
+        {
+
+            // *(rowWin[irange]) = cindex + irange;
+            std::cout << cindex + irange << " ";
+        }
+        // std::cout << rowWin[0] << " ";
+    }
+    display(rowWin, size);
+
+    return NULL;
+}
+void display(int *ways[4], int size)
+{
+    // for (size_t i = 0; i < size; i++)
+    // {
+    //     for (size_t k = 0; k < 4; k++)
+    //     {
+    //         std::cout << ways[i][k] << " ";
+    //     }
+    // }
+}
+
+void sort(int *playerRecording, int size)
+{
+    int isChange = false;
+    int temp = 0;
+    for (int i = 1; i < size; i++)
+    {
+        isChange = false;
+        for (int k = 0; k < size - i; k++)
+        {
+            if (playerRecording[k] < playerRecording[k + 1])
+            {
+                temp = playerRecording[k];
+                playerRecording[k] = playerRecording[k + 1];
+                playerRecording[k + 1] = temp;
+                isChange = true;
+            }
+        }
+        if (isChange == false)
+            break;
+    }
+}
+bool rowWin(int step, int *playerRecording, int size, int index)
+{
+    int row, rowWinMin, rowWinMax;
+    row = step / C4_COLUMN;
+    rowWinMin = row * C4_COLUMN;
+    rowWinMax = rowWinMin + C4_COLUMN;
+    int leftIndex = 1, rightIndex = 1;
+    int left = index - 1, right = index + 1;
+    int cleft = step - 1, cright = step + 1;
+    do
+    {
+        if (playerRecording[left] = index)
+        {
+        }
+
+    } while (1);
+}
+bool isWin(int step, int *playerRecording, int size)
+{
+    if (size < 4)
+        return false;
+    sort(playerRecording, size);
+
+    if (step > step / C4_COLUMN * C4_COLUMN + C4_COLUMN)
+    {
+        /* code */
+    }
 }
