@@ -176,23 +176,13 @@ int **wayOfWins()
         }
         // std::cout << rowWin[0] << " ";
     }
-    display(rowWin, size);
 
     return NULL;
 }
-void display(int *ways[4], int size)
-{
-    // for (size_t i = 0; i < size; i++)
-    // {
-    //     for (size_t k = 0; k < 4; k++)
-    //     {
-    //         std::cout << ways[i][k] << " ";
-    //     }
-    // }
-}
 
-void sort(int *playerRecording, int size)
+int sortAndFindStepIndex(int *array, int size)
 {
+    int index = size - 1;
     int isChange = false;
     int temp = 0;
     for (int i = 1; i < size; i++)
@@ -200,43 +190,129 @@ void sort(int *playerRecording, int size)
         isChange = false;
         for (int k = 0; k < size - i; k++)
         {
-            if (playerRecording[k] < playerRecording[k + 1])
+            if (array[k] < array[k + 1])
             {
-                temp = playerRecording[k];
-                playerRecording[k] = playerRecording[k + 1];
-                playerRecording[k + 1] = temp;
+                if (index = k)
+                {
+                    index = k + 1;
+                }
+                temp = array[k];
+                array[k] = array[k + 1];
+                array[k + 1] = temp;
                 isChange = true;
             }
         }
         if (isChange == false)
             break;
     }
+    return index;
 }
+
 bool rowWin(int step, int *playerRecording, int size, int index)
 {
     int row, rowWinMin, rowWinMax;
     row = step / C4_COLUMN;
     rowWinMin = row * C4_COLUMN;
     rowWinMax = rowWinMin + C4_COLUMN;
-    int leftIndex = 1, rightIndex = 1;
-    int left = index - 1, right = index + 1;
-    int cleft = step - 1, cright = step + 1;
+
+    int left_cursor = 0;
+    int right_cursor = 0;
+    bool left_loop = true;
+    bool right_loop = true;
+
     do
     {
-        if (playerRecording[left] = index)
+        if (left_cursor + right_cursor >= 3)
         {
+            return true;
         }
+        else if (!left_loop && !right_loop)
+        {
+            return false;
+        }
+        if(index)
+        if (left_loop)
+        {
+            if (playerRecording[index - (left_cursor - 1)] == step - (left_cursor - 1) && playerRecording[index - (left_cursor - 1)] < rowWinMin)
+            {
+                left_cursor++;
+            }
+            else
+            {
+                left_loop = false;
+            }
+        }
+        if (left_cursor + right_cursor >= 3)
+        {
 
+            return true;
+        }
+        else if (!left_loop && !right_loop)
+        {
+            return false;
+        }
+        if (right_loop)
+        {
+            if (playerRecording[index + (right_cursor + 1)] == step + (left_cursor + 1) && playerRecording[index + (right_cursor + 1)] > rowWinMax)
+            {
+                right_cursor++;
+            }
+            else
+            {
+                right_cursor = false;
+            }
+        }
     } while (1);
 }
-bool isWin(int step, int *playerRecording, int size)
+int binarySearch(int value, int *array, int size)
 {
+    int left = 0, right = size - 1;
+    int mid_number = 0;
+    do
+    {
+        mid_number = (left + right) / 2;
+        if (array[mid_number] == value)
+            return mid_number;
+        else if (array[mid_number] > value)
+            left = mid_number;
+        else
+            right = mid_number;
+
+    } while (left <= right);
+    return -1;
+}
+void display(int *array, int size)
+{
+    for (size_t i = 0; i < size; i++)
+    {
+        std::cout << array[i] << " ";
+    }
+    std::cout << std::endl;
+}
+
+bool isWin(int *playerRecording, int size)
+{
+    std::cout << "Start ";
+
     if (size < 4)
         return false;
-    sort(playerRecording, size);
+    int step = playerRecording[size - 1];
+    int index = -1;
+    index = sortAndFindStepIndex(playerRecording, size);
 
-    if (step > step / C4_COLUMN * C4_COLUMN + C4_COLUMN)
-    {
-        /* code */
-    }
+    std::cout << "step: " << step << std::endl;
+    std::cout << "index: " << index << std::endl;
+    display(playerRecording, size);
+
+    bool iswin = rowWin(step, playerRecording, size, index);
+    std::cout << "isWin: " << iswin << std::endl;
+    return false;
 }
+
+// int main()
+// {
+//   int size = 10;
+//   int array[] = {41, 40, 35, 36, 29, 30, 37, 21, 22, 38};
+//   isWin(array, size);
+//   return 0;
+// }
