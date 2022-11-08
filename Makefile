@@ -2,6 +2,7 @@ all: main clean
 
 CXX = clang++
 override CXXFLAGS += -g -Wno-everything
+override CXXFLAGS += -std=c++17
 
 SRCS = $(shell find ./ -name '.ccls-cache' -type d -prune -o -type f -name '*.cpp' -print | sed -e 's/ /\\ /g')
 OBJS = $(SRCS:.cpp=.o)
@@ -21,7 +22,7 @@ include $(DEPS)
 main: $(OBJS)
 	$(CXX) $(CXXFLAGS) $(OBJS) -o "$@"
 
-main-debug: $(OBJS)
+debug-clean: $(OBJS)
 	$(CXX) $(CXXFLAGS) -O0 $(OBJS) -o "$@"
 
 clean:
