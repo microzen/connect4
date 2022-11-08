@@ -1,14 +1,9 @@
 #ifndef FILEREADER_HPP
 #define FILEREADER_HPP
 
-#define FILE_LINE_SIZE 10
+#define FILE_LINE_MAX_SIZE 10
 
 #include <iostream>
-using namespace std;
-string* FileReader(string);
-void FileWriter(string*);
-
-// demo
-// void Print(string);
-
+std::string *FileReader(std::string, int);
+bool FileWriter(std::string, std::string *);
 #endif

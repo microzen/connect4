@@ -1,74 +1,43 @@
 #include <iostream>
-#include <stack>
 #include "../connect4/connect4.hpp"
 
-class RecordingStru
+class RecordingCore
 {
 public:
-    RecordingStru(int spet, PieceColor color)
-    {
-        _spet = spet;
-        _color = color;
-    }
-
-private:
-    int _spet;
-    PieceColor _color;
-};
-// template<typename T>
-class recordingStack
-{
-public:
-    void push(RecordingStru stru)
+    /// @brief push
+    /// @param step
+    void addSpet(int step)
     {
         if (_index >= C4_MAXVALUE)
         {
-            throw "";
+            throw "Max";
         }
-        _spets[++_index] = stru;
+        _steps[++_index] = step;
     }
-    void pop()
+    /// @brief pop
+    void removeSpet()
     {
         if (_index < 0)
         {
-            throw "";
+            throw "Min";
         }
-        // delete _spets[C4_MAXVALUE];
         _index--;
+    }
+    int *toArray()
+    {
+        int *re = new int[this->_index + 1];
+        for (size_t i = 0; i <= this->_index; i++)
+        {
+            re[i] = _steps[i];
+        }
+        return re;
+    }
+    int getSize()
+    {
+        return this->_index + 1;
     }
 
 private:
     int _index = -1;
-    RecordingStru _spets[C4_MAXVALUE];
+    int _steps[C4_MAXVALUE];
 };
-
-using namespace std;
-class RecordingCore
-{
-private:
-    stack<RecordingStru> _recording_stack;
-
-public:
-    RecordingCore();
-    void addSpet(int spet, PieceColor color);
-    int removeSpet();
-    ~RecordingCore();
-};
-
-RecordingCore::RecordingCore()
-{
-}
-
-RecordingCore::~RecordingCore()
-{
-}
-
-void RecordingCore::addSpet(int spet, PieceColor color)
-{
-    RecordingStru re(spet, color);
-    _recording_stack.push(re);
-}
-int RecordingCore::removeSpet()
-{
-    _recording_stack.pop();
-}

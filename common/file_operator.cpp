@@ -1,17 +1,19 @@
-#include <iostream>
+// Example, you can change anything but follow the rule
+// string[] readFileToStringArray(string,int = FILE_LINE_MAX_SIZE)
+
+#include <fstream>
 #include <string>
+#include "./file_operator.hpp"
 
-#include "file_operator.hpp"
-
-using namespace std;
-
-string *FileReader(string path) {
-
-  string *fileStr = new string[FILE_LINE_SIZE];
-
-  for (size_t i = 0; i < FILE_LINE_SIZE; i++) {
-    fileStr[i] = to_string(i);
+std::string *readFileToStringArray(std::string path, int lineSize = FILE_LINE_MAX_SIZE)
+{
+  std::ifstream connect4;
+  connect4.open(path, std::ios::out);
+  std::string *fileStr = new std::string[lineSize];
+  for (size_t i = 0; i < lineSize; i++)
+  {
+    getline(connect4, fileStr[i]);
   }
-
+  connect4.close();
   return fileStr;
 }
