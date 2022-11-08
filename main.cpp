@@ -16,9 +16,26 @@
 using namespace std;
 int main()
 {
+
   C4Interface *c4Interface = new C4Interface();
   c4Interface->displayMenu();
 
   int chose = c4Interface->menuChoose();
+
+  int board[C4_ROW][C4_COLUMN];
+
+  for (size_t i = 0; i < C4_ROW; i++)
+  {
+    for (size_t k = 0; k < C4_COLUMN; k++)
+    {
+      board[i][k] = NONE;
+    }
+  }
+
+  board[5][1] = RED;
+  board[5][0] = YELLOW;
+
+  c4Interface->displayBoard(board);
+
   return 0;
 }
