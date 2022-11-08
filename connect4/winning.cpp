@@ -3,6 +3,7 @@
 #include "connect4.hpp"
 #include "../common/sort.hpp"
 
+void log(std::string str);
 const int _WINNING_ARRAYS[69][4] = {
     {0, 1, 2, 3},
     {41, 40, 39, 38},
@@ -190,11 +191,11 @@ int sortAndFindStepIndex(int *array, int size)
         isChange = false;
         for (int k = 0; k < size - i; k++)
         {
-            if (array[k] < array[k + 1])
+            if (array[k] > array[k + 1])
             {
-                if (index = k)
+                if (index == k + 1)
                 {
-                    index = k + 1;
+                    index = k;
                 }
                 temp = array[k];
                 array[k] = array[k + 1];
@@ -208,7 +209,7 @@ int sortAndFindStepIndex(int *array, int size)
     return index;
 }
 
-bool rowWin(int step, int *playerRecording, int size, int index)
+bool rowWin(int step, int *array, int size, int index)
 {
     int row, rowWinMin, rowWinMax;
     row = step / C4_COLUMN;
@@ -219,49 +220,57 @@ bool rowWin(int step, int *playerRecording, int size, int index)
     int right_cursor = 0;
     bool left_loop = true;
     bool right_loop = true;
-
+    int next_left_array = -1;
+    int next_right_array = -1;
+    int next_left_step = -1;
+    int next_right_step = -1;
+    int test = 0;
     do
     {
+        test++;
+        next_left_array = array[index - (left_cursor + 1)];
+        next_right_array = array[index + (right_cursor + 1)];
+
+        next_left_step = step - (left_cursor + 1);
+        next_right_step = step + (right_cursor + 1);
+
         if (left_cursor + right_cursor >= 3)
         {
             return true;
         }
-        else if (!left_loop && !right_loop)
+        else if (left_loop == false && right_loop == false)
         {
             return false;
         }
-        if(index)
         if (left_loop)
         {
-            if (playerRecording[index - (left_cursor - 1)] == step - (left_cursor - 1) && playerRecording[index - (left_cursor - 1)] < rowWinMin)
+            if (next_left_array >= rowWinMin && next_left_array == next_left_step)
             {
+                log("left array" + std::to_string(next_left_array));
+                log("left step" + std::to_string(next_left_step));
                 left_cursor++;
             }
             else
             {
                 left_loop = false;
+                log("----");
             }
-        }
-        if (left_cursor + right_cursor >= 3)
-        {
-
-            return true;
-        }
-        else if (!left_loop && !right_loop)
-        {
-            return false;
         }
         if (right_loop)
         {
-            if (playerRecording[index + (right_cursor + 1)] == step + (left_cursor + 1) && playerRecording[index + (right_cursor + 1)] > rowWinMax)
+            if (next_right_array <= rowWinMax && next_right_array == next_right_step)
             {
+                log("right array" + std::to_string(next_right_array));
+                log("right step" + std::to_string(next_right_step));
                 right_cursor++;
             }
             else
             {
-                right_cursor = false;
+                right_loop = false;
+                log("****");
             }
         }
+
     } while (1);
 }
 int binarySearch(int value, int *array, int size)
@@ -288,6 +297,10 @@ void display(int *array, int size)
         std::cout << array[i] << " ";
     }
     std::cout << std::endl;
+}
+void log(std::string str)
+{
+    std::cout << str << std::endl;
 }
 
 bool isWin(int *playerRecording, int size)
