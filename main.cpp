@@ -20,7 +20,7 @@ int main() {
   int size = 3;
   for (int i = 0; i < fsize; i++) {
     std::string *arr = convertToArray(files[i], ";", size);
-    cout << "name" << arr[0] << endl;
+    cout << "name  " << arr[0] << endl;
   }
   return 0;
 }
