@@ -13,13 +13,26 @@
 
 using namespace std;
 int main() {
-  int fsize = 10;
-  string *files = readFileToStringArray("./test.txt", fsize);
-
-  int size = 3;
+  int fsize = 4;
+  string *files = readFileToStringArray("./recording_list.txt", fsize);
+  cout << "File:" << endl;
   for (int i = 0; i < fsize; i++) {
-    std::string *arr = convertToArray(files[i], ";", size);
-    cout << "name  " << arr[0] << endl;
+    cout << files[i] << endl;
+  }
+
+  int size = 5;
+  string str = files[0];
+  string *array = convertToArray(str, ";", size);
+  cout << "\nFirst line:" << endl;
+  for (int i = 0; i < size; i++) {
+    cout << array[i] << endl;
+  }
+  int reSize = stoi(array[3]); // (int array[3]);
+  string *reStr = convertToArray(array[4], ",", reSize);
+
+  cout << "\nRecording list:" << endl;
+  for (int i = 0; i < reSize; i++) {
+    cout << reStr[i] << endl;
   }
   return 0;
 }
