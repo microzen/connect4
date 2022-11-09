@@ -5,29 +5,14 @@
 #define C4_COLUMN 7
 #define C4_MAXVALUE 42
 
-enum PieceColor{
+enum PieceColor
+{
     NONE = 0,
     RED,
     YELLOW
 };
 
-#include <iostream>
-#include <time.h>
-#include <string>
-
-class Connect4
-{
-public:
-    int getInTurn();
-    void dropPiece(int);
-    bool isWin();
-    std::string **getTable();
-
-private:
-    int _turn;
-    time_t _start_time;
-    void _reset();
-    std::string **_table;
-};
+int dropPiece(int, PieceColor, int **);
+void dropPieceToIndex(int, PieceColor, int **);
 
 #endif
