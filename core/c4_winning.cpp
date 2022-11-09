@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../connect4/connect4.hpp"
+#include "./connect4.hpp"
 class WayOfWin
 {
 public:

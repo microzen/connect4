@@ -8,8 +8,7 @@
 #include <string>
 
 #include "./core/c4_interface.hpp"
-#include "./core/convert.hpp"
-#include "./core/file_operator.hpp"
+#include "./core/common.hpp"
 #include "./demo/demo_hpp.hpp"
 
 using namespace std;

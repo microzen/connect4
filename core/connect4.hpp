@@ -1,5 +1,5 @@
-#ifndef connect4_hpp
-#define connect4_hpp
+#ifndef CONNECT4_HPP
+#define CONNECT4_HPP
 
 #define C4_ROW 6
 #define C4_COLUMN 7
