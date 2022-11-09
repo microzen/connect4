@@ -1,6 +1,6 @@
 #include <iostream>
 #include "winning.hpp"
-#include "connect4.hpp"
+#include "../core/connect4.hpp"
 #include "../common/sort.hpp"
 
 void log(std::string str);

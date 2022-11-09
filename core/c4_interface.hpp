@@ -1,4 +1,6 @@
-#include "../connect4/connect4.hpp"
+#ifndef C4INTERFACE_HPP
+#define C4INTERFACE_HPP
+#include "./connect4.hpp"
 class C4Interface
 {
 public:
@@ -6,3 +8,4 @@ public:
     int menuChoose();
     void displayBoard(int[C4_ROW][C4_COLUMN]);
 };
+#endif

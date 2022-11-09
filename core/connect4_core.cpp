@@ -1,5 +1,5 @@
 
-#include "../connect4/connect4.hpp"
+#include "./connect4.hpp"
 
 int dropPiece(int lineNumber, PieceColor color, int **array)
 {
