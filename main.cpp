@@ -5,20 +5,22 @@
 #pragma one
 #include <iostream>
 #include <string>
-#include <vector>
 #include <iomanip>
 
 #include "./demo/demo_hpp.hpp"
-#include "./common/file_operator.hpp"
+#include "./core/convert.hpp"
 #include "./core/c4_interface.hpp"
-#include "./connect4/winning.hpp"
 
 using namespace std;
 int main()
 {
-  C4Interface *c4Interface = new C4Interface();
-  c4Interface->displayMenu();
+  int size = 7;
+  std::string str = "a1ee;a2;a3;a4;a5;a6;a7";
+  std::string *arr = convertToArray(str, ";", size);
+  for (size_t i = 0; i < size; i++)
+  {
+    cout << arr[i] << endl;
+  }
 
-  int chose = c4Interface->menuChoose();
   return 0;
 }
