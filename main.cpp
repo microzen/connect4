@@ -3,24 +3,24 @@
 // https://google.github.io/styleguide/cppguide.html
 
 #pragma one
+#include <iomanip>
 #include <iostream>
 #include <string>
-#include <iomanip>
 
-#include "./demo/demo_hpp.hpp"
-#include "./core/convert.hpp"
 #include "./core/c4_interface.hpp"
+#include "./core/convert.hpp"
+#include "./core/file_operator.hpp"
+#include "./demo/demo_hpp.hpp"
 
 using namespace std;
-int main()
-{
-  int size = 7;
-  std::string str = "a1ee;a2;a3;a4;a5;a6;a7";
-  std::string *arr = convertToArray(str, ";", size);
-  for (size_t i = 0; i < size; i++)
-  {
-    cout << arr[i] << endl;
-  }
+int main() {
+  int fsize = 10;
+  string *files = readFileToStringArray("./test.txt", fsize);
 
+  int size = 3;
+  for (int i = 0; i < fsize; i++) {
+    std::string *arr = convertToArray(files[i], ";", size);
+    cout << "name" << arr[0] << endl;
+  }
   return 0;
 }
