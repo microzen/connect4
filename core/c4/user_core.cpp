@@ -1,32 +1,18 @@
-#include <iostream>
 #include "../connect4.hpp"
 
-using namespace std;
-class ConnectSub
+int IPlayer::dropPiece(int line)
 {
-public:
-    void dropPiece(int);
-};
-class User
-{
-private:
-    string _name;
-    int _score;
-
-public:
-    User(std::string, int);
-    ~User();
-    // void Winning(Recording);
-protected:
-    void Save();
-};
-
-User::User(std::string name, int score)
-{
-    this->_name = name;
-    this->_score = score;
+    this->_connect4->dropPiece(line, this->_color);
 }
-
-User::~User()
+void IPlayer::setColor(PieceColor color)
 {
+    this->_color = color;
+}
+std::string IPlayer::getName()
+{
+    return this->_name;
+}
+void IPlayer::setScore(int score)
+{
+    this->_score = score;
 }
