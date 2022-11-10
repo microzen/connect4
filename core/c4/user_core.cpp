@@ -1,5 +1,5 @@
 #include <iostream>
-#include "./connect4.hpp"
+#include "../connect4.hpp"
 
 using namespace std;
 class ConnectSub

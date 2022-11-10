@@ -3,7 +3,7 @@
 
 #include <fstream>
 #include <string>
-#include "./common.hpp"
+#include "../common.hpp"
 
 std::string *readFileToStringArray(std::string path, int lineSize = FILE_LINE_MAX_SIZE)
 {
