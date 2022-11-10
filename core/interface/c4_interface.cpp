@@ -1,19 +1,8 @@
 #include <iostream>
-#include "./connect4.hpp"
+#include "../connect4.hpp"
+#include "../c4_interface.hpp"
+
 using namespace std;
-class C4Interface {
-
-private:
-  int countClick = 0;
-
-private:
-  /* data */
-
-public:
-  void displayMenu();
-  int menuChoose();
-  void displayBoard(int board[C4_ROW][C4_COLUMN]);
-};
 
 void C4Interface::displayMenu() {
   printf("==========================\n");
@@ -64,10 +53,10 @@ void C4Interface::displayBoard(int array[C4_ROW][C4_COLUMN]) {
 				cout << "\x1b[0m  -";
 			}
 			else if (array[r][c] == RED) {
-				cout << "\u001b[38;5;160m  X";
+				cout << this->redStr("  X");
 			}
 			else if (array[r][c] == YELLOW) {
-				cout << "\u001b[38;5;226m  O";
+				cout << this->yellowStr("  O");
 			}
 		}
 
