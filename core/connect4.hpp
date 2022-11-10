@@ -21,8 +21,8 @@ enum C4Status
     END = 0
 };
 
-int dropPiece(int, PieceColor, int **);
-void dropPieceToIndex(int, PieceColor, int **);
+int dropPiece(int, PieceColor, int [C4_ROW][C4_COLUMN]);
+void dropPieceToIndex(int, PieceColor, int [C4_ROW][C4_COLUMN]);
 
 class C4Recording
 {

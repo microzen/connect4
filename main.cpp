@@ -8,31 +8,30 @@
 #include <string>
 
 #include "./core/c4_interface.hpp"
+#include "./core/connect4.hpp"
 #include "./core/common.hpp"
-#include "./demo/demo_hpp.hpp"
 
 using namespace std;
 int main() {
-  int fsize = 4;
-  string *files = readFileToStringArray("./recording_list.txt", fsize);
-  cout << "File:" << endl;
-  for (int i = 0; i < fsize; i++) {
-    cout << files[i] << endl;
-  }
+  C4Interface *c4Interface = new C4Interface();
+  int board[C4_ROW][C4_COLUMN];
 
-  int size = 5;
-  string str = files[0];
-  string *array = convertToArray(str, ";", size);
-  cout << "\nFirst line:" << endl;
-  for (int i = 0; i < size; i++) {
-    cout << array[i] << endl;
+  for (size_t i = 0; i < C4_ROW; i++)
+  {
+    for (size_t k = 0; k < C4_COLUMN; k++)
+    {
+      board[i][k] = NONE;
+    }
   }
-  int reSize = stoi(array[3]); // (int array[3]);
-  string *reStr = convertToArray(array[4], ",", reSize);
+  int index = -1;
+  index = dropPiece(0, RED, board);
+  cout<<index<<endl;
+  index = dropPiece(0, YELLOW, board);
+  cout<<index<<endl;
+  index = dropPiece(3, RED, board);
+  cout<<index<<endl;
+  dropPieceToIndex(31, YELLOW, board);
 
-  cout << "\nRecording list:" << endl;
-  for (int i = 0; i < reSize; i++) {
-    cout << reStr[i] << endl;
-  }
+  c4Interface->displayBoard(board);
   return 0;
 }
