@@ -25,6 +25,6 @@ public:
     /// @param  int turn
     /// @param  string time
     /// @param  PieceColor
-    void displayPlayerInfoWithColor(string,int,string,PieceColor);
+    void displayPlayerInfoWithColor(std::string,int,std::string,PieceColor);
 };
 #endif
