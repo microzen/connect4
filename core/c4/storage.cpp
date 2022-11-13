@@ -28,7 +28,7 @@ string *CacheStorage::getContentAsArray()
     {
         string *newarray = readFileToStringArray(this->_path, size + 1);
         this->_array = &newarray[1];
-        free(&newarray[0]);
+        // free(&newarray[0]);
     }
     return this->_array;
 }
