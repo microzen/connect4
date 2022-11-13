@@ -26,10 +26,6 @@ namespace std
     void dropPieceToIndex(int, PieceColor, int[C4_ROW][C4_COLUMN]);
 } // namespace std
 
-class ISerialize
-{
-};
-
 class C4Recording
 {
 private:
