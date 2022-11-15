@@ -1,5 +1,9 @@
+#include <string>
 #include "../connect4.hpp"
-
+IPlayer::IPlayer(std::string name,IC4 *ic4){
+    this->_name =name;
+    this->_connect4 = ic4;
+}
 int IPlayer::dropPiece(int line)
 {
     this->_connect4->dropPiece(line, this->_color);

@@ -222,9 +222,8 @@ C4Winning::C4Winning()
     _recording = r;
     _step = _recording[_recording_size - 1];
 }
-bool C4Winning::isWin()
+bool IC4BaseRule::isWin(int* steps, int size)
 {
-    WayOfWin *rw = new RowOfWin(this->_step);
     // rw->compare()
     return 0;
 }

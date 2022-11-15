@@ -2,6 +2,7 @@
 #define CONNECT4_HPP
 
 #include <string>
+#include "./storage.hpp"
 
 #define C4_ROW 6
 #define C4_COLUMN 7
@@ -50,7 +51,7 @@ public:
     int dropPiece(int, PieceColor);
 };
 
-class IPlayer
+class IPlayer : ISerialize
 {
 protected:
     std::string _name;
@@ -59,25 +60,25 @@ protected:
     IC4 *_connect4 = nullptr;
 
 public:
-    IPlayer(std::string, IC4);
+    IPlayer(std::string, IC4*);
     int dropPiece(int);
     void setColor(PieceColor);
     std::string getName();
     void setScore(int);
+    std::string serializeInfo();
 };
 class IC4BaseRule
 {
 public:
-    bool isWin();
+    bool isWin(int*,int);
 };
-class IC4Game
+class IC4Game : public ISerialize
 {
 protected:
     C4Status _status = UNSTART;
     IPlayer *(_player[2]);
     IC4 *_connect4 = nullptr;
     IPlayer *current = nullptr;
-    C4Recording *_recording = nullptr;
     int _turn = 0;
     int _player_counter = 0;
 
@@ -88,15 +89,16 @@ public:
     void nextTurn();
     int getTurnNumber();
     C4Status getStatus();
+    std::string serializeInfo();
 };
-class IJudgeProxy : public IC4BaseRule, public IC4Game, public IC4
+class IJudgeProxy : public IC4Game, public IC4
 {
 protected:
     C4Recording *_recording = nullptr;
     IC4Game *_game = nullptr;
 
 public:
-    IJudgeProxy(IPlayer *, IPlayer *, IC4 *, IC4Game *);
-    int dropPiece(int);
+    IJudgeProxy(IPlayer *, IPlayer *, IC4BaseRule*, IC4 *, IC4Game *);
+    int dropPiece(int,PieceColor);
 };
 #endif
