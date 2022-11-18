@@ -18,30 +18,35 @@ int IJudgeProxy::dropPiece(int step, PieceColor color)
     int index = 0;
     bool iswin = false;
 
-    index = this->_connect4->dropPiece(index,color);
+    index = this->_connect4->dropPiece(step, color);
     this->_game->recording->addStep(index);
 
     C4Recording *color_recording = nullptr;
     if (color == RED)
-    {  
+    {
         color_recording = this->_r_recording;
     }
     else if (color == YELLOW)
     {
         color_recording = _y_recording;
-    }else{
+    }
+    else
+    {
         throw "Wrong Color";
     }
     color_recording->addStep(step);
     iswin = this->_rule->isWin(color_recording->toArray(), color_recording->getSize());
-    if (iswin){
+    if (iswin)
+    {
         this->_game->setStatus(WON);
     }
     return index;
 }
-void IJudgeProxy::getBoard(int board[C4_ROW][C4_COLUMN]){
-   return this->_connect4->getBoard(board);
+void IJudgeProxy::getBoard(int board[C4_ROW][C4_COLUMN])
+{
+    return this->_connect4->getBoard(board);
 }
-void IJudgeProxy::init(){
+void IJudgeProxy::init()
+{
     this->_connect4->init();
 }

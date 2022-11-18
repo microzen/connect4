@@ -2,6 +2,8 @@
 #define CONNECT4_HPP
 
 #include <string>
+#include <ctime>
+#include <chrono>
 #include "./storage.hpp"
 
 #define C4_ROW 6
@@ -44,6 +46,7 @@ class IC4
 {
 protected:
     int _table[C4_ROW][C4_COLUMN];
+
 public:
     virtual void getBoard(int[C4_ROW][C4_COLUMN]) = 0;
     virtual void init() = 0;
@@ -86,12 +89,16 @@ public:
 
 class IC4Game : public ISerialize
 {
+private:
+    std::chrono::system_clock::time_point start_time;
+    std::chrono::system_clock::time_point end_time;
+    double player_time[2];
+
 protected:
     C4Status _status = UNSTART;
     IPlayer *(_player[2]);
     IC4 *_connect4 = nullptr;
-    IPlayer *current = nullptr;
-    int _turn = 0;
+    int _turn = -1;
     int _player_counter = 0;
 
 public:
@@ -102,6 +109,7 @@ public:
     void setPlayer(IPlayer *);
     void nextTurn();
     int getTurnNumber();
+    double currentPlayerUsedTimeAsSeconds();
     C4Status getStatus();
     void setStatus(C4Status);
     std::string serializeInfo();

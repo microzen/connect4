@@ -10,14 +10,13 @@
 #include "./core/c4_interface.hpp"
 #include "./core/common.hpp"
 #include "./core/storage.hpp"
+#include "./core/connect4.hpp"
 
 using namespace std;
 int main()
 {
   C4Application *app = new C4Application();
   C4Interface *inter = new C4Interface();
-
-  int choice = app->meunModule(inter);
 
   IC4 *connect4 = new Connect4();
 
@@ -26,22 +25,31 @@ int main()
   IC4Game *game = new IC4Game();
   IC4BaseRule *rule = new IC4BaseRule();
   IJudgeProxy *proxy = new IJudgeProxy(rule, connect4, game);
+  CacheStorage *recording_storage = new CacheStorage("recording_list.txt");
+  CacheStorage *socre_storage = new CacheStorage("score_list.txt");
 
-  switch (choice)
+  int choice = 0;
+  do
   {
-  case 1:
-    player1 = new IPlayer(app->askNameModule(inter), proxy);
-    player2 = new IPlayer(app->askNameModule(inter), proxy);
-    app->gameModule(player1, player2, game, proxy, inter);
-    break;
+    choice = app->meunModule(inter);
+    switch (choice)
+    {
+    case 1:
+      player1 = new IPlayer(app->askNameModule(inter), proxy);
+      player2 = new IPlayer(app->askNameModule(inter), proxy);
+      app->gameModule(player1, player2, game, proxy, inter);
+      break;
 
-  case 2:
-  case 3:
-    app->scoreModule();
-    break;
-  default:
-    break;
-  }
+    case 2:
+      app->scoreModule(socre_storage);
+      break;
+    case 3:
+      app->recordingModule(recording_storage, inter);
+      break;
+    default:
+      break;
+    }
+
+  } while (choice == 0);
   return 0;
 }
-

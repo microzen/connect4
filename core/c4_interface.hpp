@@ -17,15 +17,22 @@ public:
     /// @brief
     /// @param  string name
     /// @param  int turn
-    /// @param  string time
+    /// @param  double time second
     /// @param  PieceColor
-    void displayPlayerInfoWithColor(std::string, int, std::string, PieceColor);
+    void displayGameInfoWithColor(std::string, int, double, PieceColor);
     /// @brief
     /// @param  string name
     /// @param  int scores
     /// @param  string time
     /// @param  PieceColor
     void displayWinningInfo(std::string, int, std::string, PieceColor);
+
+    /// @brief 
+    /// @param  string player one's name
+    /// @param  int player two's name
+    /// @param  string player one's scores
+    /// @param  int player two's scores
+    void displayStartInfo(std::string,int,std::string,int);
 };
 class C4Application
 {
@@ -39,7 +46,7 @@ public:
     std::string askNameModule(C4Interface *);
     void startGameModule();
     void gameModule(IPlayer *, IPlayer *, IC4Game *, IC4 *, C4Interface *);
-    void recordingModule();
-    void scoreModule();
+    void recordingModule(CacheStorage*,C4Interface*);
+    void scoreModule(CacheStorage*);
 };
 #endif
