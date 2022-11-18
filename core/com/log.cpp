@@ -6,3 +6,7 @@ void log(string str)
 {
     cout<<"LOG: " << str << endl;
 }
+void log(int log)
+{
+    cout<<"LOG: " << log << endl;
+}

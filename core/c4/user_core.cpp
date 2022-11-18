@@ -20,3 +20,9 @@ void IPlayer::setScore(int score)
 {
     this->_score = score;
 }
+PieceColor IPlayer::getColor(){
+    return this->_color;
+}
+int IPlayer::getScore(){
+    return this->_score;
+}

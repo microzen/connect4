@@ -1,5 +1,6 @@
 
 #include "../connect4.hpp"
+#include "../common.hpp"
 
 namespace std
 {
@@ -30,19 +31,30 @@ namespace std
     }
 }
 
-int IC4::dropPiece(int line, PieceColor color)
+int Connect4::dropPiece(int line, PieceColor color)
 {
-    std::dropPiece(line, color, this->_table);
+    int index = -1;
+    index =std::dropPiece(line, color, this->_table);
+    return index;
 }
-void IC4::getBoard(int newTable[C4_ROW][C4_COLUMN])
+void Connect4::getBoard(int newBoard[C4_ROW][C4_COLUMN])
 {
-    // #TODO:
+    for (int i = 0; i < C4_ROW; i++)
+    {
+        for (int k = 0; k < C4_COLUMN; k++)
+        {
+            newBoard[i][k] = this->_table[i][k];
+        }
+    }
 }
 
-void IC4::init()
+void Connect4::init()
 {
-    // #TODO:
-}
-IC4::IC4(){
-    
+    for (int i = 0; i < C4_ROW; i++)
+    {
+        for (int k = 0; k < C4_COLUMN; k++)
+        {
+            this->_table[i][k] = NONE;
+        }
+    }
 }

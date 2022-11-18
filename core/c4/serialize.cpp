@@ -18,7 +18,15 @@ string IPlayer::serializeInfo()
     string info = name + ";" + score + ";" + strtime;
     return info;
 }
-string IC4Game::serializeInfo(){
-    // #TODO:
+string IC4Game::serializeInfo()
+{
+    //[player1_name];[player2_name];[date];[size];[recording]
+    string player1 = this->_player[0]->getName();
+    string player2 = this->_player[1]->getName();
+    string data = "test";
+    C4Recording *re = this->recording;
+    int size = re->getSize();
+    int *r_array = this->recording->toArray();
+    // TODO:
     return "";
 }

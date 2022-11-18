@@ -43,15 +43,22 @@ class IC4
 {
 protected:
     int _table[C4_ROW][C4_COLUMN];
-
 public:
-    IC4();
+    virtual void getBoard(int[C4_ROW][C4_COLUMN]) = 0;
+    virtual void init() = 0;
+    virtual int dropPiece(int, PieceColor) = 0;
+};
+
+class Connect4 : public IC4
+{
+public:
+    // Connect4();
     void getBoard(int[C4_ROW][C4_COLUMN]);
     void init();
     int dropPiece(int, PieceColor);
 };
 
-class IPlayer : ISerialize
+class IPlayer : public ISerialize
 {
 protected:
     std::string _name;
@@ -60,17 +67,19 @@ protected:
     IC4 *_connect4 = nullptr;
 
 public:
-    IPlayer(std::string, IC4*);
+    IPlayer(std::string, IC4 *);
     int dropPiece(int);
     void setColor(PieceColor);
+    PieceColor getColor();
     std::string getName();
     void setScore(int);
+    int getScore();
     std::string serializeInfo();
 };
 class IC4BaseRule
 {
 public:
-    bool isWin(int*,int);
+    bool isWin(int *, int);
 };
 class IC4Game : public ISerialize
 {
@@ -84,21 +93,30 @@ protected:
 
 public:
     IC4Game();
+    void start(IC4 *, IPlayer *, IPlayer *);
+    IC4 *getConnect4();
     IPlayer *currentPlayer();
     void setPlayer(IPlayer *);
     void nextTurn();
     int getTurnNumber();
     C4Status getStatus();
+    void setStatus(C4Status);
     std::string serializeInfo();
+    C4Recording *recording = nullptr;
 };
-class IJudgeProxy : public IC4Game, public IC4
+class IJudgeProxy : public IC4 //, public IC4Game
 {
 protected:
-    C4Recording *_recording = nullptr;
+    C4Recording *_r_recording = nullptr;
+    C4Recording *_y_recording = nullptr;
     IC4Game *_game = nullptr;
+    IC4BaseRule *_rule = nullptr;
+    IC4 *_connect4 = nullptr;
 
 public:
-    IJudgeProxy(IPlayer *, IPlayer *, IC4BaseRule*, IC4 *, IC4Game *);
-    int dropPiece(int,PieceColor);
+    IJudgeProxy(IC4BaseRule *, IC4 *, IC4Game *);
+    int dropPiece(int, PieceColor);
+    void init();
+    void getBoard(int[C4_ROW][C4_COLUMN]);
 };
 #endif
