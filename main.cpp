@@ -29,27 +29,27 @@ int main()
   CacheStorage *socre_storage = new CacheStorage("score_list.txt");
 
   int choice = 0;
+
   do
   {
-    choice = app->meunModule(inter);
-    switch (choice)
+    if (choice == 1)
     {
-    case 1:
       player1 = new IPlayer(app->askNameModule(inter), proxy);
       player2 = new IPlayer(app->askNameModule(inter), proxy);
       app->gameModule(player1, player2, game, proxy, inter);
-      break;
-
-    case 2:
+    }
+    else if (choice == 2)
+    {
       app->scoreModule(socre_storage);
-      break;
-    case 3:
+    }
+    else if (choice == 3)
+    {
       app->recordingModule(recording_storage, inter);
-      break;
-    default:
+    }
+    else if (choice == 4)
+    {
       break;
     }
-
   } while (choice == 0);
   return 0;
 }
