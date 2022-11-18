@@ -1,10 +1,43 @@
 #include <iostream>
-#include "../connect4/connect4.hpp"
+#include "../connect4.hpp"
 class WayOfWin
 {
 public:
     int compare(int index, int *array, int size)
     {
+        int left_value = next_left();
+        int right_value = next_right();
+        int left_index = index - 1;
+        int right_index = index + 1;
+
+        int range = 0;
+
+        while (left_index >= 0)
+        {
+            if (array[left_index] == left_value)
+            {
+                range++;
+                left_value = next_left();
+            }
+            else
+            {
+                left_index--;
+            }
+        }
+
+        while (right_index < size)
+        {
+            if (array[right_index] == right_value)
+            {
+                range++;
+                right_value = next_right();
+            }
+            else
+            {
+                right_index++;
+            }
+        }
+        return range;
     }
     int maxValue()
     {
@@ -19,14 +52,14 @@ public:
 
 protected:
     const int way_size = 7;
-    int *ways;
+    int ways[7];
     int index = 0;
     int _min_index = 0;
     int _max_index = 0;
-    int _left_index = 0;
-    int _right_index = 0;
 
 private:
+    int _left_index = 0;
+    int _right_index = 0;
     int next_left()
     {
         _left_index++;
@@ -41,23 +74,39 @@ private:
             return -1;
         return ways[index + _right_index];
     }
-    int compare_left(int index, int *array, int range = 0)
-    {
-        if (range >= 3)
-        {
-        }
-    }
 };
-class RowOfWin : WayOfWin
+class RowOfWin :public WayOfWin
 {
 public:
-    RowOfWin(int spet)
+    RowOfWin(int step)
     {
+        this->_step = step;
         this->init();
     }
     void init()
     {
+        int row = this->_step / C4_COLUMN;
+        int row_min = row * C4_COLUMN;
+        int row_max = row_min + C4_COLUMN;
+        int column = row - row_min;
+
+        this->index = column;
+        this->ways[this->index] = this->_step;
+
+        for (size_t i = row + 1; i <= row_max && i <= row + 3; i++)
+        {
+            this->ways[i - row_min] = i;
+            this->_min_index = i - row_min;
+        }
+        for (size_t i = row - 1; i >= row_min && i >= row - 3; i--)
+        {
+            this->ways[i - row_min] = i;
+            this->_max_index = i - row_min;
+        }
     }
+
+private:
+    int _step = -1;
 };
 class C4Winning
 {
@@ -68,9 +117,6 @@ private:
     int _orderly_index = -1;
     int *_orderly_list = nullptr;
 
-    bool _compare_row_spet(int index)
-    {
-    }
     bool compare_row_win()
     {
         int row = this->_step / C4_COLUMN;
@@ -176,8 +222,8 @@ C4Winning::C4Winning()
     _recording = r;
     _step = _recording[_recording_size - 1];
 }
-bool C4Winning::isWin()
+bool IC4BaseRule::isWin(int* steps, int size)
 {
-    // return this->_row_win();
+    // rw->compare()
     return 0;
 }

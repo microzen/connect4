@@ -1,5 +1,4 @@
 #include <string>
-#include <vector>
 using namespace std;
 string convertToString(string arrays[], string replacer, int size)
 {
@@ -15,27 +14,19 @@ string convertToString(string arrays[], string replacer, int size)
     return str;
 }
 
-std::vector<std::string> convertToArray(std::string str, std::string replacer)
+std::string *convertToArray(std::string str, std::string replacer, int size)
 {
-    std::vector<std::string> result;
+    std::string* result = new string[size];
     std::string::size_type begin, end;
 
     end = str.find(replacer);
     begin = 0;
-
-    while (end != std::string::npos)
+    for (size_t i = 0; i < size - 1; i++)
     {
-        if (end - begin != 0)
-        {
-            result.push_back(str.substr(begin, end - begin));
-        }
+        result[i] = str.substr(begin, end - begin);
         begin = end + replacer.size();
         end = str.find(replacer, begin);
     }
-
-    if (begin != str.length())
-    {
-        result.push_back(str.substr(begin));
-    }
+    result[size - 1] = str.substr(begin, end - begin);
     return result;
 }
