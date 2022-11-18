@@ -36,12 +36,15 @@ int IC4::dropPiece(int line, PieceColor color)
 }
 void IC4::getBoard(int newTable[C4_ROW][C4_COLUMN])
 {
-    // #TODO:
+    for (int i=0; i < 7; i++)
+      *newTable[i] = *_table[i];
 }
 
 void IC4::init()
 {
-    // #TODO:
+    for (int c = 0; c < C4_COLUMN; c++)
+    for (int r = 0; r < C4_ROW; r++)
+       _table[r][c] = 0;
 }
 IC4::IC4(){
     
