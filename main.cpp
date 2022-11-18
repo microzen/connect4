@@ -8,7 +8,6 @@
 #include <string>
 
 #include "./core/c4_interface.hpp"
-#include "./core/connect4.hpp"
 #include "./core/common.hpp"
 #include "./core/storage.hpp"
 
@@ -45,3 +44,4 @@ int main()
   }
   return 0;
 }
+
