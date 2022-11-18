@@ -39,6 +39,7 @@ public:
     void removeStep();
     void addStep(int);
 };
+
 class IC4
 {
 protected:
@@ -67,11 +68,13 @@ public:
     void setScore(int);
     std::string serializeInfo();
 };
+
 class IC4BaseRule
 {
 public:
     bool isWin(int*,int);
 };
+
 class IC4Game : public ISerialize
 {
 protected:

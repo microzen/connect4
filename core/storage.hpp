@@ -1,12 +1,14 @@
 #ifndef STORAGE_HPP
 #define STORAGE_HPP
 #include <string>
+
 class ISerialize
 {
 public:
     // ISerialize();
     virtual std::string serializeInfo() = 0;
 };
+
 class CacheStorage
 {
 private:
