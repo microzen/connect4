@@ -27,15 +27,21 @@ int main()
   IJudgeProxy *proxy = new IJudgeProxy(rule, connect4, game);
   CacheStorage *recording_storage = new CacheStorage("recording_list.txt");
   CacheStorage *socre_storage = new CacheStorage("score_list.txt");
-
+  C4Score *sco = new C4Score(socre_storage);
   int choice = 0;
 
   do
   {
+    choice = app->meunModule(inter);
     if (choice == 1)
     {
+      inter->displayRuleOfPlaying();
+      
       player1 = new IPlayer(app->askNameModule(inter), proxy);
+      player1->setScore(sco->getStorageByName(player1->getName()));
+      
       player2 = new IPlayer(app->askNameModule(inter), proxy);
+      player2->setScore(sco->getStorageByName(player2->getName()));
       app->gameModule(player1, player2, game, proxy, inter);
     }
     else if (choice == 2)

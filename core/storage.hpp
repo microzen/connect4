@@ -28,4 +28,11 @@ public:
     int getSize();
     std::string *getContentAsArray();
 };
+class C4Score{
+private:
+  CacheStorage *_cache = nullptr;
+public:
+  C4Score(CacheStorage*);
+  int getStorageByName(std::string);
+};
 #endif
