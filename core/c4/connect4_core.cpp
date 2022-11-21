@@ -1,10 +1,16 @@
+/* ********************************************************
+**                       About Game                      **  
+**********************************************************/
+
 #include "../connect4.hpp"
 #include "../common.hpp"
+
 IC4Game::IC4Game()
 {
     this->_turn = -1;
 }
-void IC4Game::start(IC4 *connect4, IPlayer *player1, IPlayer *player2)
+
+void IC4Game::getReady(IC4 *connect4, IPlayer *player1, IPlayer *player2)
 {
     if (this->_status != UNSTART)
     {
@@ -25,9 +31,10 @@ void IC4Game::start(IC4 *connect4, IPlayer *player1, IPlayer *player2)
     this->_turn = -1;
     this->player_time[0] = 0;
     this->player_time[1] = 0;
-
+    
     // #TODO:
 }
+
 void IC4Game::nextTurn()
 {
     if (this->getStatus() != PLAYING)

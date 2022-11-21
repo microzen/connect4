@@ -7,6 +7,7 @@ class ISortSwap
 public:
     virtual void Swap(int *, int *) = 0;
 };
+
 class SortSwap : public ISortSwap
 {
 public:
@@ -18,6 +19,7 @@ public:
         *index2 = temp;
     }
 };
+
 class BaseSort
 {
 public:

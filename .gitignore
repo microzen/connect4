@@ -53,3 +53,7 @@ main
 
 *.dSYM
 *.d*
+
+*.tmp
+
+*.breakpoints

@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <iostream>
 #include <string>
+#include <memory>
 
 #include "./core/c4_interface.hpp"
 #include "./core/common.hpp"
@@ -26,21 +27,28 @@ int main()
   IC4BaseRule *rule = new IC4BaseRule();
   IJudgeProxy *proxy = new IJudgeProxy(rule, connect4, game);
   CacheStorage *recording_storage = new CacheStorage("recording_list.txt");
-  CacheStorage *socre_storage = new CacheStorage("score_list.txt");
-
+  CacheStorage *score_storage = new CacheStorage("score_list.txt");
+  C4Score *sco = new C4Score(score_storage);
   int choice = 0;
 
   do
   {
+    game->setStatus(UNSTART);
+    choice = app->meunModule(inter);
     if (choice == 1)
     {
+      inter->displayRuleOfPlaying();
+      
       player1 = new IPlayer(app->askNameModule(inter), proxy);
+      player1->setScore(sco->getStorageByName(player1->getName()));
+      
       player2 = new IPlayer(app->askNameModule(inter), proxy);
+      player2->setScore(sco->getStorageByName(player2->getName()));
       app->gameModule(player1, player2, game, proxy, inter);
     }
     else if (choice == 2)
     {
-      app->scoreModule(socre_storage);
+      app->scoreModule(score_storage);
     }
     else if (choice == 3)
     {
@@ -50,6 +58,6 @@ int main()
     {
       break;
     }
-  } while (choice == 0);
+  } while (choice != 0);
   return 0;
 }

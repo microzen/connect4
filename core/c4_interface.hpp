@@ -1,3 +1,8 @@
+/* ********************************************************
+**                       Header File                     **  
+**  About input and output                               **
+**********************************************************/
+
 #ifndef C4INTERFACE_HPP
 #define C4INTERFACE_HPP
 #include <string>
@@ -33,6 +38,7 @@ public:
     /// @param  string player one's scores
     /// @param  int player two's scores
     void displayStartInfo(std::string,int,std::string,int);
+    void displayRuleOfPlaying();
 };
 class C4Application
 {

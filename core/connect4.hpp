@@ -1,3 +1,8 @@
+/* ********************************************************
+**                      Header File                      **  
+** Connect 4 and game .hpp file                          **
+**********************************************************/
+
 #ifndef CONNECT4_HPP
 #define CONNECT4_HPP
 
@@ -103,7 +108,7 @@ protected:
 
 public:
     IC4Game();
-    void start(IC4 *, IPlayer *, IPlayer *);
+    void getReady(IC4 *, IPlayer *, IPlayer *);
     IC4 *getConnect4();
     IPlayer *currentPlayer();
     void setPlayer(IPlayer *);
