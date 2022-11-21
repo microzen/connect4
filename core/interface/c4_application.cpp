@@ -118,7 +118,7 @@ void C4Application::scoreModule(CacheStorage *storage) {
 void C4Application::recordingModule(CacheStorage *storage,
                                     C4Interface *c4Interface) {
 
-  cout << "\n=====================[ Recording List ]====================="
+  cout << "\n=====================[ Recording List ]=====================\n"
        << endl;
   string t_player1, t_player2, t_size, t_data, t_recording;
   const int score_size = 3;     // constant
@@ -162,22 +162,23 @@ void C4Application::recordingModule(CacheStorage *storage,
       }
   }
 
-  cout << "Num";
-  cout << setw(20) << "Name";
-  cout << setw(16) << "Date" << endl;
+  cout << left << setw(8) << "Num";
+  cout << setw(30) << "Name";
+  cout << setw(10) << "Date" << endl;
   // cout << setw(6) << "Size" << endl;
 
   for (int i = 0; i < size; i++) {
-    cout << i + 1 << ") " << setw(20) << recording_list[i][0] << "/";
-    cout << recording_list[i][1];
-    cout << setw(16) << recording_list[i][2];
+    cout << left << i + 1 << setw(7) << ") ";
+    cout << setw(12) << recording_list[i][0] << setw(6) << " VS ";
+    cout << setw(12) << recording_list[i][1];
+    cout << setw(10) << recording_list[i][2];
     cout << "\n";
   } // display file
 
   int option;
 
-  cout << "Please choose your option (0 - " << size
-       << ") to display more details:";
+  cout << "\nPlease choose your option (0 - " << size
+       << ") to display more details: ";
   cin >> option;
 
   int board[C4_ROW][C4_COLUMN];
@@ -189,8 +190,8 @@ void C4Application::recordingModule(CacheStorage *storage,
   }
   int step_size = stoi(recording_list[option - 1][3]);
   string *steps = convertToArray(recording_list[option - 1][4], ",", step_size);
-  cout << "\nHistory " << option << "):" << recording_list[option - 1][0]
-       << " .VS " << recording_list[option - 1][1] << endl;
+  cout << "\nHistory " << option << "): " << recording_list[option - 1][0]
+       << " VS " << recording_list[option - 1][1] << endl;
   for (size_t i = 0; i < step_size; i++) {
     PieceColor color;
     if (i % 2 == 0) {
