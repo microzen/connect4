@@ -3,13 +3,20 @@
 ** Displays score list and record list                   **
 **********************************************************/
 
-#include "../c4_interface.hpp"
-#include "../common.hpp"
-#include "../connect4.hpp"
 #include <iomanip>
 #include <iostream>
 #include <string>
+#include <stdio.h>
+#include <termios.h>
+#include <unistd.h>
+
+#include "../c4_interface.hpp"
+#include "../common.hpp"
+#include "../connect4.hpp"
+
 using namespace std;
+
+void exit();
 
 void C4Application::gameModule(IPlayer *player1, IPlayer *player2,
                                IC4Game *game, IC4 *connect4,
@@ -51,15 +58,17 @@ void C4Application::gameModule(IPlayer *player1, IPlayer *player2,
     // log("droped");
 
     if (game->getStatus() == WON) {
-      
+
+      game->getConnect4()->getBoard(board);
       inter->displayBoard(board);
+      
       scores = current_player->getScore();
       inter->displayWinningInfo(name, scores, "Today", color);
       break;
     }
 
   } while (1);
-
+exit();
   // save
 }
 int C4Application::meunModule(C4Interface *inter) {
@@ -107,13 +116,15 @@ void C4Application::scoreModule(CacheStorage *storage) {
         score_list[k + 1][2] = t_datetime;
       } // sort by score
   }
-  cout << "\n=======================[ Score List ]======================="
+  cout << "\n=======================[ Score List ]=======================\n"
        << endl;
   cout << "Name" << setw(16) << "Scores" << setw(20) << "Date" << endl;
   for (int i = 0; i < size; i++) {
     cout << score_list[i][0] << setw(16) << score_list[i][1] << setw(20)
          << score_list[i][2] << endl;
   } // display output
+  
+exit();
 }
 void C4Application::recordingModule(CacheStorage *storage,
                                     C4Interface *c4Interface) {
@@ -202,4 +213,34 @@ void C4Application::recordingModule(CacheStorage *storage,
     dropPieceToIndex(stoi(steps[i]), color, board);
   }
   c4Interface->displayBoard(board);
+  
+exit();
+}
+
+int get_ch()
+{
+    struct termios stored_termios, new_termios;
+    int ch; //ASCII
+    tcgetattr(STDIN_FILENO, &stored_termios); // GET: STDIN_FILENO = Standard input
+    new_termios = stored_termios;
+    new_termios.c_lflag &= ~(ICANON | ECHO); // Local modes = ICANON
+    tcsetattr(STDIN_FILENO, TCSANOW, &new_termios); //SET: Immediate
+    ch = getchar();
+    tcsetattr(STDIN_FILENO, TCSANOW, &stored_termios); // Original termios
+    return ch;
+}
+
+void exit()
+{
+    printf("\nPress 'q' or 'esc' key to back [Menu Page]\n");
+    int ch; //ASCII
+    do
+    {
+        // loop your assignment code here 
+        ch = get_ch();
+        // printf("key=%c, ASCII=%d\n", ch,ch); // Or cout<<c<<endl in C++
+    } while (ch != 'q' && ch != 27); // Esc = 27, q = 113 in ASCII
+
+    // printf("End! with key '%c'\n",ch);
+    // return 0;
 }

@@ -15,14 +15,14 @@ using namespace std;
 
 void C4Interface::displayMenu()
 {
-	cout << "\n";
-	cout << "==============================[RULES]==============================" << endl;
+	cout << "\n\n";
+	cout << "=======================[RULES]=========================" << endl;
 	cout << "Each player chooses a different color game piece." << endl;
 	cout << "\nThe [RED](" << redStr(PIECE_SYMBOL_R)
 		 << ") game piece plays first \nand the [YELLOW](" << yellowStr(PIECE_SYMBOL_Y)
 		 << ") game piece plays second." << endl;
 	cout << "\nThe first player to connect four game pieces in a line wins." << endl;
-	cout << "===================================================================\n"
+	cout << "=======================================================\n"
 		 << endl;
 	cout << "1. Play with Another Player" << endl;
 	cout << "2. Check the Score List" << endl;
@@ -137,14 +137,21 @@ void C4Interface::displayGameInfoWithColor(string name, int turn, double seconds
 }
 void C4Interface::displayWinningInfo(string name, int score, string time, PieceColor color)
 {
-	cout << "\nThe Winner is " << name << endl;
+  string color_str = "";
+  if (color == RED)
+	{
+		color_str= this->redStr(PIECE_SYMBOL_R);
+	}
+	else if (color == YELLOW)
+	{
+		color_str= this->yellowStr(PIECE_SYMBOL_Y);
+	}
+	cout << "\nThe Winner is " << name << " | Color: "<< color_str << endl;
 	cout << "Congratulations!!" << endl;
 
 	cout << "\nTotal score is: " << score << endl;
 
-	cout << "\nGame Piece Color: " << color << endl;
-
-	cout << "Time: " << time << endl;
+	// cout << "Time: " << time << endl;
 }
 
 void C4Interface::displayStartInfo(std::string p1, int p1s, std::string p2, int p2s)
