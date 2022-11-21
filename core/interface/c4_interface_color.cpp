@@ -1,3 +1,8 @@
+/* ********************************************************
+**                         Color                         **  
+** Prints the game pieces in yellow or red               **
+**********************************************************/
+
 #include "../c4_interface.hpp"
 
 std::string C4Interface::redStr(std::string str)

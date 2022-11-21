@@ -1,5 +1,12 @@
+/* ********************************************************
+**                        Winning                        **  
+** Determines the different possible ways a player could **
+** win                                                   **
+**********************************************************/
+
 #include <iostream>
 #include "../connect4.hpp"
+
 class WayOfWin
 {
 public:
@@ -75,6 +82,7 @@ private:
         return ways[index + _right_index];
     }
 };
+
 class RowOfWin :public WayOfWin
 {
 public:
@@ -108,6 +116,7 @@ public:
 private:
     int _step = -1;
 };
+
 class C4Winning
 {
 private:
@@ -222,6 +231,7 @@ C4Winning::C4Winning()
     _recording = r;
     _step = _recording[_recording_size - 1];
 }
+
 bool IC4BaseRule::isWin(int* steps, int size)
 {
     // rw->compare()

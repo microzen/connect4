@@ -1,3 +1,9 @@
+/* ********************************************************
+**                       Game Output                     **  
+** Includes main menu, game board, asking for player     **
+** names, display player info, and winning info          **
+**********************************************************/
+
 #include <iostream>
 #include "../connect4.hpp"
 #include "../c4_interface.hpp"
@@ -140,6 +146,7 @@ void C4Interface::displayWinningInfo(string name, int score, string time, PieceC
 
 	cout << "Time: " << time << endl;
 }
+
 void C4Interface::displayStartInfo(std::string p1, int p1s, std::string p2, int p2s)
 {
 	cout << "\n======= " << p1 << " (" << redStr(PIECE_SYMBOL_R) << ") .VS " << p2 << " (" << yellowStr(PIECE_SYMBOL_Y) << ") =======" << endl;

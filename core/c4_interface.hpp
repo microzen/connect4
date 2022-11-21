@@ -1,3 +1,8 @@
+/* ********************************************************
+**                       Header File                     **  
+**  About input and output                               **
+**********************************************************/
+
 #ifndef C4INTERFACE_HPP
 #define C4INTERFACE_HPP
 #include <string>

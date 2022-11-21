@@ -1,3 +1,8 @@
+/* ********************************************************
+**                    File Operator                      **  
+** Reads from and writes to a txt file                   **
+**********************************************************/
+
 // Example, you can change anything but follow the rule
 // string[] readFileToStringArray(string,int = FILE_LINE_MAX_SIZE)
 
@@ -18,6 +23,7 @@ std::string *readFileToStringArray(std::string path, int lineSize = FILE_LINE_MA
   connect4.close();
   return fileStr;
 }
+
 void writeFileToStringArray(std::string path, std::string *array, int size = FILE_LINE_MAX_SIZE)
 {
   std::ofstream connect4;

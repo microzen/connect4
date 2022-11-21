@@ -1,8 +1,14 @@
+/* ********************************************************
+**                        Serialize                      **  
+** Serializes the players info and the game information  **
+**********************************************************/
+
 #include "../common.hpp"
 #include "../connect4.hpp"
 #include <ctime>
 #include <string>
 using namespace std;
+
 string IPlayer::serializeInfo() {
   string score = to_string(this->_score);
   string name = this->_name;

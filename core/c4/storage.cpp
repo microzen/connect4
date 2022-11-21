@@ -1,7 +1,13 @@
+/* ********************************************************
+**                        Storage                        ** 
+** Saves players info and game info to a txt file        **
+**********************************************************/
+
 #include "../storage.hpp"
 #include "../common.hpp"
 #include <string>
 using namespace std;
+
 CacheStorage::CacheStorage(string path) { this->_path = path; }
 void CacheStorage::expired() {
   this->_array = nullptr;

@@ -1,4 +1,6 @@
-
+/* ********************************************************
+**                    Common Header file                 **  
+**********************************************************/
 
 #ifndef COMMON_HPP
 #define COMMON_HPP
@@ -7,6 +9,9 @@
 
 #include <iostream>
 #include <string>
+
+
+
 std::string *readFileToStringArray(std::string, int);
 void writeFileToStringArray(std::string, std::string *, int);
 std::string convertToString(std::string arrays[], std::string replacer, int size);

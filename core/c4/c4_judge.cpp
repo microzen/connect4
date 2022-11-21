@@ -1,9 +1,15 @@
+/* ********************************************************
+**                  Judge and Proxy                      **  
+** Intercepts steps and saves them to the recording list **
+**********************************************************/
+
 #include "../connect4.hpp"
 #include "../common.hpp"
 // bool IC4BaseRule::isWin(int *steps, int size)
 // {
 //     return false;
 // }
+
 IJudgeProxy::IJudgeProxy(IC4BaseRule *rule, IC4 *connect4, IC4Game *game)
 {
     this->_game = game;
@@ -13,6 +19,7 @@ IJudgeProxy::IJudgeProxy(IC4BaseRule *rule, IC4 *connect4, IC4Game *game)
     this->_r_recording = new C4Recording();
     this->_y_recording = new C4Recording();
 }
+
 int IJudgeProxy::dropPiece(int step, PieceColor color)
 {
     int index = 0;
@@ -42,10 +49,12 @@ int IJudgeProxy::dropPiece(int step, PieceColor color)
     }
     return index;
 }
+
 void IJudgeProxy::getBoard(int board[C4_ROW][C4_COLUMN])
 {
     return this->_connect4->getBoard(board);
 }
+
 void IJudgeProxy::init()
 {
     this->_connect4->init();
