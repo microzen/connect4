@@ -34,7 +34,7 @@ void dropPieceToIndex(int index, PieceColor color,
 int Connect4::dropPiece(int line, PieceColor color) {
   int index = -1;
   index = std::dropPiece(line, color, this->_table);
-  log("c4 drop");
+  // log("c4 drop");
   return index;
 }
 void Connect4::getBoard(int newBoard[C4_ROW][C4_COLUMN]) {
