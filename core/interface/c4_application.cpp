@@ -29,7 +29,9 @@ void C4Application::gameModule(IPlayer *player1, IPlayer *player2,
   double seconds;
   PieceColor color;
   int scores;
-  game->start(connect4, player1, player2);
+  log(1);
+  game->getReady(connect4, player1, player2);
+  log(2);
   inter->displayStartInfo(player1->getName(), player1->getScore(),
                           player2->getName(), player2->getScore());
   do {

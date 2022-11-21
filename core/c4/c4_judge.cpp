@@ -15,9 +15,6 @@ IJudgeProxy::IJudgeProxy(IC4BaseRule *rule, IC4 *connect4, IC4Game *game)
     this->_game = game;
     this->_connect4 = connect4;
     this->_rule = rule;
-
-    this->_r_recording = new C4Recording();
-    this->_y_recording = new C4Recording();
 }
 
 int IJudgeProxy::dropPiece(int step, PieceColor color)
@@ -57,5 +54,7 @@ void IJudgeProxy::getBoard(int board[C4_ROW][C4_COLUMN])
 
 void IJudgeProxy::init()
 {
+    this->_r_recording = new C4Recording();
+    this->_y_recording = new C4Recording();
     this->_connect4->init();
 }

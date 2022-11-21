@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <iostream>
 #include <string>
+#include <memory>
 
 #include "./core/c4_interface.hpp"
 #include "./core/common.hpp"
@@ -32,6 +33,7 @@ int main()
 
   do
   {
+    game->setStatus(UNSTART);
     choice = app->meunModule(inter);
     if (choice == 1)
     {

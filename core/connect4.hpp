@@ -108,7 +108,7 @@ protected:
 
 public:
     IC4Game();
-    void start(IC4 *, IPlayer *, IPlayer *);
+    void getReady(IC4 *, IPlayer *, IPlayer *);
     IC4 *getConnect4();
     IPlayer *currentPlayer();
     void setPlayer(IPlayer *);
