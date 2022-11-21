@@ -22,7 +22,7 @@ void C4Interface::displayMenu()
 		 << ") game piece plays first \nand the [YELLOW](" << yellowStr(PIECE_SYMBOL_Y)
 		 << ") game piece plays second." << endl;
 	cout << "\nThe first player to connect four game pieces in a line wins." << endl;
-	cout << "==================================================================\n"
+	cout << "===================================================================\n"
 		 << endl;
 	cout << "1. Play with Another Player" << endl;
 	cout << "2. Check the Score List" << endl;
@@ -38,7 +38,7 @@ int C4Interface::menuChoose()
 	max = 3;
 	while (1)
 	{
-		cout << "Please type the number and press [ENTER]:";
+		cout << "Please type the number and press [ENTER]: ";
 		cin >> choose;
 		if (choose >= min && choose <= max)
 		{
@@ -157,6 +157,6 @@ void C4Interface::displayStartInfo(std::string p1, int p1s, std::string p2, int 
 
 void C4Interface::displayRuleOfPlaying(){
   cout << "\n=====[ Play with Another Player ]======"<<endl;
-  cout << "Your choice is 1. Play with Another Player."<<endl;
-  cout << "Please enter names for Player 1 and Player 2."<<endl;
+  cout << "You selected option 1: Play with Another Player."<<endl;
+  cout << "Please enter names for Player 1 and Player 2.\n"<<endl;
 }
