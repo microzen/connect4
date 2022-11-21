@@ -27,7 +27,7 @@ void C4Application::gameModule(IPlayer *player1, IPlayer *player2,
                           player2->getName(), player2->getScore());
   do {
 
-    log("new turn");
+    // log("new turn");
     game->nextTurn(); // turn start form -1
     game->getConnect4()->getBoard(board);
     inter->displayBoard(board);
@@ -42,13 +42,13 @@ void C4Application::gameModule(IPlayer *player1, IPlayer *player2,
     inter->displayGameInfoWithColor(name, turn_number, seconds, color);
 
     line = inter->askLine(name);
-    log(line);
+    // log(line);
 
     cout << "\n";
 
     current_player->dropPiece(line);
 
-    log("droped");
+    // log("droped");
 
     if (game->getStatus() == WON) {
       
