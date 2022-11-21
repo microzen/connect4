@@ -1,5 +1,5 @@
 /* ********************************************************
-**                     Business Logic                    **  
+**                     Business Logic                    **
 ** Displays score list and record list                   **
 **********************************************************/
 
@@ -51,6 +51,8 @@ void C4Application::gameModule(IPlayer *player1, IPlayer *player2,
     log("droped");
 
     if (game->getStatus() == WON) {
+      
+      inter->displayBoard(board);
       scores = current_player->getScore();
       inter->displayWinningInfo(name, scores, "Today", color);
       break;
@@ -116,7 +118,8 @@ void C4Application::scoreModule(CacheStorage *storage) {
 void C4Application::recordingModule(CacheStorage *storage,
                                     C4Interface *c4Interface) {
 
-  cout << "\n=====================[ Recording List ]=====================" << endl;
+  cout << "\n=====================[ Recording List ]====================="
+       << endl;
   string t_player1, t_player2, t_size, t_data, t_recording;
   const int score_size = 3;     // constant
   const int recording_size = 5; // constant
