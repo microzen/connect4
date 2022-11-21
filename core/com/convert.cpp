@@ -1,5 +1,11 @@
+/* ********************************************************
+**                       Conversion                      **  
+** Converts between string and array                     **
+**********************************************************/
+
 #include <string>
 using namespace std;
+
 string convertToString(string arrays[], string replacer, int size)
 {
     string str = "";

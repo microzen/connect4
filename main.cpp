@@ -26,8 +26,8 @@ int main()
   IC4BaseRule *rule = new IC4BaseRule();
   IJudgeProxy *proxy = new IJudgeProxy(rule, connect4, game);
   CacheStorage *recording_storage = new CacheStorage("recording_list.txt");
-  CacheStorage *socre_storage = new CacheStorage("score_list.txt");
-  C4Score *sco = new C4Score(socre_storage);
+  CacheStorage *score_storage = new CacheStorage("score_list.txt");
+  C4Score *sco = new C4Score(score_storage);
   int choice = 0;
 
   do
@@ -46,7 +46,7 @@ int main()
     }
     else if (choice == 2)
     {
-      app->scoreModule(socre_storage);
+      app->scoreModule(score_storage);
     }
     else if (choice == 3)
     {

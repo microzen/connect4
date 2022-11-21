@@ -1,3 +1,8 @@
+/* ********************************************************
+**                     Business Logic                    **  
+** Displays score list and record list                   **
+**********************************************************/
+
 #include "../c4_interface.hpp"
 #include "../common.hpp"
 #include "../connect4.hpp"
@@ -5,6 +10,7 @@
 #include <iostream>
 #include <string>
 using namespace std;
+
 void C4Application::gameModule(IPlayer *player1, IPlayer *player2,
                                IC4Game *game, IC4 *connect4,
                                C4Interface *inter) {

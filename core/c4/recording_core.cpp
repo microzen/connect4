@@ -1,3 +1,9 @@
+/* ********************************************************
+**                          Record                       **  
+** Records each move the players make                    **
+** Uses Stack structure                                  **
+**********************************************************/
+
 #include <iostream>
 #include "../connect4.hpp"
 

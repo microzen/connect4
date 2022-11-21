@@ -1,3 +1,9 @@
+/* ********************************************************
+**                        Winning                        **  
+** Determines the different possible ways a player could **
+** win                                                   **
+**********************************************************/
+
 #include <iostream>
 #include "../connect4.hpp"
 using namespace std;

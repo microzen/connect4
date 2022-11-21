@@ -1,3 +1,8 @@
+/* ********************************************************
+**                       Game Board                      **  
+** Drops game piece into selected column and displays    **
+** the game board                                        **
+**********************************************************/
 
 #include "../connect4.hpp"
 #include "../common.hpp"

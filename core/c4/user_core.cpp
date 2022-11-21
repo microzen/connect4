@@ -1,5 +1,10 @@
+/* ********************************************************
+**                      About Player                     **
+**********************************************************/
+
 #include "../connect4.hpp"
 #include <string>
+
 IPlayer::IPlayer(std::string name, IC4 *ic4) {
   this->_name = name;
   this->_connect4 = ic4;
