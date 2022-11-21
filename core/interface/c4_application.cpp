@@ -120,9 +120,9 @@ void C4Application::scoreModule(CacheStorage *storage) {
   }
   cout << "\n=======================[ Score List ]=======================\n"
        << endl;
-  cout << "Name" << setw(16) << "Scores" << setw(20) << "Date" << endl;
+  cout << left << setw(20) << "Name" << setw(20) << "Scores" << setw(20) << "Date" << endl;
   for (int i = 0; i < size; i++) {
-    cout << score_list[i][0] << setw(16) << score_list[i][1] << setw(20)
+    cout << setw(20) << score_list[i][0] << setw(20) << score_list[i][1] << setw(20)
          << score_list[i][2] << endl;
   } // display output
   
