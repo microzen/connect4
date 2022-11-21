@@ -1,61 +1,65 @@
 #include <iostream>
 #include "../connect4.hpp"
+using namespace std;
+
 class WayOfWin
 {
 public:
     int compare(int index, int *array, int size)
     {
+        // cout << "compare: ";
+        // for (size_t i = 0; i < size; i++)
+        // {
+        //     cout << array[i] << " ";
+        // }
+
+        int range = 1;
         int left_value = next_left();
         int right_value = next_right();
-        int left_index = index - 1;
-        int right_index = index + 1;
+        // cout << "index: " << this->_index << endl;
+        // cout << "left:" << left_value << endl;
+        // cout << "right: " << right_value << endl;
 
-        int range = 0;
-
-        while (left_index >= 0)
+        bool isfind = false;
+        do
         {
-            if (array[left_index] == left_value)
+            isfind = false;
+            for (size_t i = 0; i < size; i++)
             {
-                range++;
-                left_value = next_left();
-            }
-            else
-            {
-                left_index--;
-            }
-        }
+                if (array[i] == left_value)
+                {
+                    left_value = next_left();
+                    range++;
+                    isfind = true;
+                }
 
-        while (right_index < size)
-        {
-            if (array[right_index] == right_value)
-            {
-                range++;
-                right_value = next_right();
+                if (array[i] == right_value)
+                {
+                    right_value = next_right();
+                    range++;
+                    isfind = true;
+                }
             }
-            else
-            {
-                right_index++;
-            }
-        }
+        } while (isfind);
         return range;
     }
     int maxValue()
     {
-        return ways[_max_index];
+        return _ways[_max_index];
     }
     int minValue()
     {
-        return ways[_min_index];
+        return _ways[_min_index];
     }
     virtual void init() = 0;
     int size = 0;
 
 protected:
-    const int way_size = 7;
-    int ways[7];
-    int index = 0;
+    int _way_size = 7;
+    int _ways[7];
+    int _index = 0;
     int _min_index = 0;
-    int _max_index = 0;
+    int _max_index = 6;
 
 private:
     int _left_index = 0;
@@ -63,22 +67,22 @@ private:
     int next_left()
     {
         _left_index++;
-        if (_left_index < _min_index)
+        if (_index - _left_index < _min_index)
             return -1;
-        return ways[index - _left_index];
+        return _ways[_index - _left_index];
     }
     int next_right()
     {
         _right_index++;
-        if (_right_index > _max_index)
+        if (_index + _left_index > _max_index)
             return -1;
-        return ways[index + _right_index];
+        return _ways[_index + _right_index];
     }
 };
-class RowOfWin :public WayOfWin
+class HorizontalOfWin : public WayOfWin
 {
 public:
-    RowOfWin(int step)
+    HorizontalOfWin(int step)
     {
         this->_step = step;
         this->init();
@@ -87,27 +91,149 @@ public:
     {
         int row = this->_step / C4_COLUMN;
         int row_min = row * C4_COLUMN;
-        int row_max = row_min + C4_COLUMN;
-        int column = row - row_min;
-
-        this->index = column;
-        this->ways[this->index] = this->_step;
-
-        for (size_t i = row + 1; i <= row_max && i <= row + 3; i++)
+        int row_max = row_min + C4_COLUMN - 1;
+        int column = this->_step - row_min;
+        this->_index = column;
+        for (int i = 0; i < this->_way_size; i++)
         {
-            this->ways[i - row_min] = i;
-            this->_min_index = i - row_min;
-        }
-        for (size_t i = row - 1; i >= row_min && i >= row - 3; i--)
-        {
-            this->ways[i - row_min] = i;
-            this->_max_index = i - row_min;
+            _ways[i] = row_min + i;
         }
     }
 
 private:
     int _step = -1;
 };
+class VOfWin : public WayOfWin
+{
+public:
+    VOfWin(int step)
+    {
+        this->_step = step;
+        this->init();
+    }
+    void init()
+    {
+        int row = this->_step / C4_COLUMN;
+        int row_min = row * C4_COLUMN;
+        int row_max = row_min + C4_COLUMN - 1;
+        int column = this->_step - row_min;
+
+        this->_max_index = 5;
+        for (size_t i = 0; i < this->_max_index + 1; i++)
+        {
+            _ways[i] = i * C4_COLUMN + column;
+            if (this->_ways[i] == this->_step)
+            {
+                this->_index = i;
+            }
+        }
+    }
+
+private:
+    int _step = -1;
+};
+
+class UOfWin : public WayOfWin
+{
+public:
+    UOfWin(int step)
+    {
+        this->_step = step;
+        this->init();
+    }
+    void init()
+    {
+
+        int row = this->_step / C4_COLUMN;
+        int row_min = row * C4_COLUMN;
+        int row_max = row_min + C4_COLUMN - 1;
+        int column = this->_step - row_min;
+        this->_way_size = 7;
+
+        this->_index = column;
+        this->_ways[this->_index] = this->_step;
+
+        this->_max_index = this->_index;
+        this->_min_index = this->_index;
+
+        int temp = -1;
+        for (size_t i = this->_index; i >= 0; i--)
+        {
+
+            temp = this->_ways[i] + 7;
+            if (temp > 41)
+            {
+                break;
+            }
+            this->_ways[i - 1] = temp - 1;
+            this->_min_index = i - 1;
+        }
+        for (size_t i = this->_index; i < this->_way_size; i++)
+        {
+            temp = this->_ways[i] - 7;
+            if (temp < 0)
+            {
+                break;
+            }
+            this->_ways[i + 1] = temp + 1;
+            this->_max_index = i + 1;
+        }
+    }
+
+private:
+    int _step = -1;
+};
+
+class DOfWin : public WayOfWin
+{
+public:
+    DOfWin(int step)
+    {
+        this->_step = step;
+        this->init();
+    }
+    void init()
+    {
+
+        int row = this->_step / C4_COLUMN;
+        int row_min = row * C4_COLUMN;
+        int row_max = row_min + C4_COLUMN - 1;
+        int column = this->_step - row_min;
+        this->_way_size = 7;
+
+        this->_index = column;
+        this->_ways[this->_index] = this->_step;
+
+        this->_max_index = this->_index;
+        this->_min_index = this->_index;
+
+        int temp = -1;
+        for (size_t i = this->_index; i > 0; i--)
+        {
+            temp = this->_ways[i] - 7;
+            if (temp < 0)
+            {
+                break;
+            }
+            this->_ways[i - 1] = temp - 1;
+            this->_min_index = i - 1;
+        }
+        for (size_t i = this->_index; i < this->_way_size; i++)
+        {
+            temp = this->_ways[i] + 7;
+            if (temp > 41)
+            {
+                break;
+            }
+            this->_ways[i + 1] = temp + 1;
+            this->_max_index = i + 1;
+        }
+    }
+
+private:
+    int _step = -1;
+};
+
 class C4Winning
 {
 private:
@@ -117,64 +243,6 @@ private:
     int _orderly_index = -1;
     int *_orderly_list = nullptr;
 
-    bool compare_row_win()
-    {
-        int row = this->_step / C4_COLUMN;
-        int row_min = row * C4_COLUMN;
-        int row_max = row_min + C4_COLUMN;
-
-        int range = 1;
-
-        int left_cursor = 0;
-        int right_cursor = 0;
-        bool left_loop = true;
-        bool right_loop = true;
-        int next_left_array = -1;
-        int next_right_array = -1;
-        int next_left_step = -1;
-        int next_right_step = -1;
-
-        do
-        {
-            next_left_array = this->_orderly_list[this->_orderly_index - (left_cursor + 1)];
-            next_right_array = this->_orderly_list[this->_orderly_index + (right_cursor + 1)];
-
-            next_left_step = this->_step - (left_cursor + 1);
-            next_right_step = this->_step + (right_cursor + 1);
-
-            if (left_cursor + right_cursor >= 3)
-            {
-                return true;
-            }
-            else if (left_loop == false && right_loop == false)
-            {
-                return false;
-            }
-            if (left_loop)
-            {
-                if (next_left_array >= row_min && next_left_array == next_left_step)
-                {
-                    left_cursor++;
-                }
-                else
-                {
-                    left_loop = false;
-                }
-            }
-            if (right_loop)
-            {
-                if (next_right_array <= row_max && next_right_array == next_right_step)
-                {
-                    right_cursor++;
-                }
-                else
-                {
-                    right_loop = false;
-                }
-            }
-
-        } while (1);
-    }
     void orderListAndFindStepIndex()
     {
         _orderly_list = _recording;
@@ -210,20 +278,48 @@ private:
     }
 
 public:
-    C4Winning();
+    C4Winning(int *, int);
     bool isWin();
-    // ~C4Winning();
 };
 
-C4Winning::C4Winning()
+C4Winning::C4Winning(int *steps, int size)
 {
-    _recording_size = 10;
-    int r[] = {41, 40, 35, 31, 29, 30, 37, 21, 22, 38};
-    _recording = r;
+    _recording_size = size;
+    _recording = steps;
     _step = _recording[_recording_size - 1];
+    this->orderListAndFindStepIndex();
 }
-bool IC4BaseRule::isWin(int* steps, int size)
+bool C4Winning::isWin()
 {
-    // rw->compare()
-    return 0;
+    WayOfWin *h = new HorizontalOfWin(this->_step);
+    int h_size = 0;
+    h_size = h->compare(this->_orderly_index, this->_orderly_list, this->_recording_size);
+    if (h_size >= 4)
+    {
+        return true;
+    }
+    WayOfWin *v = new VOfWin(this->_step);
+    h_size = v->compare(this->_orderly_index, this->_orderly_list, this->_recording_size);
+    if (h_size >= 4)
+    {
+        return true;
+    }
+    WayOfWin *u = new UOfWin(this->_step);
+    h_size = u->compare(this->_orderly_index, this->_orderly_list, this->_recording_size);
+    if (h_size >= 4)
+    {
+        return true;
+    }
+    WayOfWin *d = new DOfWin(this->_step);
+    h_size = d->compare(this->_orderly_index, this->_orderly_list, this->_recording_size);
+    if (h_size >= 4)
+    {
+        return true;
+    }
+    // cout << "h_size:" << h_size << endl;
+}
+bool IC4BaseRule::isWin(int *steps, int size)
+{
+    C4Winning *win = new C4Winning(steps, size);
+    return win->isWin();
 }

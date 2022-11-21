@@ -34,7 +34,7 @@ int IJudgeProxy::dropPiece(int step, PieceColor color)
     {
         throw "Wrong Color";
     }
-    color_recording->addStep(step);
+    color_recording->addStep(index);
     iswin = this->_rule->isWin(color_recording->toArray(), color_recording->getSize());
     if (iswin)
     {
