@@ -1,5 +1,5 @@
 /* ********************************************************
-**                       Game Output                     **  
+**                       Game Output                     **
 ** Includes main menu, game board, asking for player     **
 ** names, display player info, and winning info          **
 **********************************************************/
@@ -63,7 +63,7 @@ void C4Interface::displayBoard(int array[C4_ROW][C4_COLUMN])
 	cout << "  X\n";
 
 	// Display board here
-	for (r = 0; r < C4_ROW ; r++)
+	for (r = 0; r < C4_ROW; r++)
 	{
 
 		// Left-side table index here
@@ -112,10 +112,22 @@ std::string C4Interface::askName()
 int C4Interface::askLine(string name)
 {
 	int line;
-	// cout << name << ", Your Turn!";
-	cout << "Enter Column #: ";
-	cin >> line;
-  line = line - 1;
+
+	while (1)
+	{
+		cout << "Enter Column #: ";
+		cin >> line;
+		cin.clear(); // clear input for the illegal number.
+		cin.ignore(100, '\n');
+		if (line >= 1 && line <= 7)
+		{
+			break;
+		}
+		cout << "\nThe valid choices are 1-7. Please try again." << endl;
+	}
+
+	line = line - 1;
+
 	return line;
 }
 
@@ -137,16 +149,16 @@ void C4Interface::displayGameInfoWithColor(string name, int turn, double seconds
 }
 void C4Interface::displayWinningInfo(string name, int score, string time, PieceColor color)
 {
-  string color_str = "";
-  if (color == RED)
+	string color_str = "";
+	if (color == RED)
 	{
-		color_str= this->redStr(PIECE_SYMBOL_R);
+		color_str = this->redStr(PIECE_SYMBOL_R);
 	}
 	else if (color == YELLOW)
 	{
-		color_str= this->yellowStr(PIECE_SYMBOL_Y);
+		color_str = this->yellowStr(PIECE_SYMBOL_Y);
 	}
-	cout << "\nThe Winner is " << name << " | Color: "<< color_str << endl;
+	cout << "\nThe Winner is " << name << " | Color: " << color_str << endl;
 	cout << "Congratulations!!" << endl;
 
 	cout << "\nTotal score is: " << score << endl;
@@ -157,13 +169,15 @@ void C4Interface::displayWinningInfo(string name, int score, string time, PieceC
 void C4Interface::displayStartInfo(std::string p1, int p1s, std::string p2, int p2s)
 {
 	cout << "\n======= " << p1 << " (" << redStr(PIECE_SYMBOL_R) << ") .VS " << p2 << " (" << yellowStr(PIECE_SYMBOL_Y) << ") =======" << endl;
-  cout << "Player 1: "<<p1 << " | Scores: "<<p1s<<endl;
-  cout << "Player 2: "<<p2 << " | Scores: "<<p2s<<endl;
-  cout << "\n";
+	cout << "Player 1: " << p1 << " | Scores: " << p1s << endl;
+	cout << "Player 2: " << p2 << " | Scores: " << p2s << endl;
+	cout << "\n";
 }
 
-void C4Interface::displayRuleOfPlaying(){
-  cout << "\n=====[ Play with Another Player ]======"<<endl;
-  cout << "You selected option 1: Play with Another Player."<<endl;
-  cout << "Please enter names for Player 1 and Player 2.\n"<<endl;
+void C4Interface::displayRuleOfPlaying()
+{
+	cout << "\n=====[ Play with Another Player ]======" << endl;
+	cout << "You selected option 1: Play with Another Player." << endl;
+	cout << "Please enter names for Player 1 and Player 2.\n"
+		 << endl;
 }
