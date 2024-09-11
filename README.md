@@ -8,6 +8,17 @@ Plans
 - [Connect4 Robot.md](doc/Connect4%20Robot.md)
 - Graph App with SFML
 
+# Run
+
+Makefile
+
+```c++
+// run in terminal
+- make clean
+- make
+- ./main
+```
+
 ``` text
 .
 ├── LICENSE
