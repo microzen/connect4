@@ -18,6 +18,6 @@ std::string convertToString(std::string arrays[], std::string replacer, int size
 std::string *convertToArray(std::string str, std::string replacer, int size);
 void log(std::string);
 void log(int);
-void log(double);
-void log(long long);
+//void log(double);
+//void log(long long);
 #endif
