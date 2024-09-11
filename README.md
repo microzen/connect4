@@ -4,7 +4,9 @@ Full doc --> [Flowchart.md](doc/Flowchart.md)
 
 Design --> [C4 - Class Diagram.md](doc/C4%20-%20Class%20Diagram.md)
 
-Plans --> [Connect4 Robot.md](doc/Connect4%20Robot.md)
+Plans
+- [Connect4 Robot.md](doc/Connect4%20Robot.md)
+- Graph App with SFML
 
 ``` text
 .
