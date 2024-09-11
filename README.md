@@ -12,11 +12,18 @@ Plans
 
 Makefile
 
-```c++
+```text
 // run in terminal
 - make clean
 - make
 - ./main
+```
+
+CMake
+
+```text
+- cmake -S . -B build
+- ./build/connect4
 ```
 
 ``` text
