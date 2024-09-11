@@ -47,8 +47,8 @@ Menu --> P[Play with Player]
 graph TD
 	%%Menu -.-> P[Play with Another Player]
 	Menu --> S[Scores List]
-	S --> Display[Display: Name, Scores. ->Descending by Scores] --> |Type `q` or `Q` to Quit|S
-	Type[Type `q` or `Q` to Quit] --> END
+	S --> Display[Display: Name, Scores. ->Descending by Scores] --> |Type q or Q to Quit|S
+	Type[Type q or Q to Quit] --> END
 	%%Menu -.-> R[Recording List]
 	Display -.Read.-> DB[(File)]
 	%%Menu -.-> C[Play with Computer]%%
@@ -64,8 +64,8 @@ graph TD
 	R --> Display[/Display: Number, Player Name, Date. Descending/] --> 
 	Number[/Type the Number to See More Details/] -->
 	Detail 
-	Number -.-> |Type `q` or `Q` to Quit|R
-	Detail -.-> |Type `q` or `Q` to Quit|Display
+	Number -.-> |Type q or Q to Quit|R
+	Detail -.-> |Type q or Q to Quit|Display
 	Detail
 	%%Menu -.-> C[Play with Computer]%%
 
